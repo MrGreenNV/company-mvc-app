@@ -19,4 +19,9 @@
               class="ru.example.company.TranceMusic">
         </bean>
 
+        <bean id = "musicPlayer"
+              class="ru.example.company.MusicPlayer">
+              <constructor-arg ref="rockMusicBean"/>
+        </bean>
+
 </beans>
