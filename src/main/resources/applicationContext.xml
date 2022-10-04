@@ -10,29 +10,32 @@
        <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
        <bean id = "classicalMusicBean"
-              class="ru.example.company.ClassicalMusic">
+              class="ru.example.company.ClassicalMusic"
+              init-method="doMyInit"
+              destroy-method="doMyDestroy"
+              factory-method="getClassicalMusic">
        </bean>
 
        <bean id = "rockMusicBean"
               class="ru.example.company.RockMusic">
        </bean>
 
-       <bean id = "tranceMusicBean"
-              class="ru.example.company.TranceMusic">
-       </bean>
+<!--       <bean id = "tranceMusicBean"-->
+<!--              class="ru.example.company.TranceMusic">-->
+<!--       </bean>-->
 
-       <bean id = "musicPlayer"
-              class="ru.example.company.MusicPlayer">
-<!--              <constructor-arg ref="rockMusicBean"/>-->
-           <property name="musicList">
-               <list value-type="ru.example.company.Music">
-                   <ref bean="classicalMusicBean"/>
-                   <ref bean="rockMusicBean"/>
-                   <ref bean="tranceMusicBean"/>
-               </list>
-           </property>
-              <property name="name" value="${musicPlayer.name}"/>
-              <property name="volume" value="${musicPlayer.volume}"/>
-       </bean>
+<!--       <bean id = "musicPlayer"-->
+<!--              class="ru.example.company.MusicPlayer">-->
+<!--&lt;!&ndash;              <constructor-arg ref="rockMusicBean"/>&ndash;&gt;-->
+<!--           <property name="musicList">-->
+<!--               <list value-type="ru.example.company.Music">-->
+<!--                   <ref bean="classicalMusicBean"/>-->
+<!--                   <ref bean="rockMusicBean"/>-->
+<!--                   <ref bean="tranceMusicBean"/>-->
+<!--               </list>-->
+<!--           </property>-->
+<!--              <property name="name" value="${musicPlayer.name}"/>-->
+<!--              <property name="volume" value="${musicPlayer.volume}"/>-->
+<!--       </bean>-->
 
 </beans>
