@@ -2,25 +2,21 @@ package ru.example.company;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 @Component
 public class ClassicalMusic implements Music {
 
-    private ClassicalMusic() {
+    List<String> songList = new ArrayList<String>();
+    {
+        songList.add("Symphony №9");
+        songList.add("Symphony №3");
+        songList.add("Symphony №6");
     }
-
-    public static ClassicalMusic getClassicalMusic() {
-        return new ClassicalMusic();
-    }
-
     public String getSong() {
-        return "Hungarian Rhapsody";
-    }
-
-    public void doMyInit() {
-        System.out.println("Doing my initialization");
-    }
-
-    public void doMyDestroy() {
-        System.out.println("Doing my destruction");
+        Random random = new Random();
+        return songList.get(random.nextInt(3));
     }
 }

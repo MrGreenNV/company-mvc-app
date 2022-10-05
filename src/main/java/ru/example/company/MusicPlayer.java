@@ -20,6 +20,22 @@ public class MusicPlayer {
         this.musicList.add(tranceMusic);
     }
 
+    public String playMusic(MusicGenre musicGenre) {
+
+        switch (musicGenre) {
+            case ROCK: {
+                return musicList.get(1).getSong();
+            }
+            case CLASSICAL: {
+                return musicList.get(0).getSong();
+            }
+            case TRANCE: {
+                return musicList.get(2).getSong();
+            }
+            default: return null;
+        }
+    }
+
 //    public void setMusic(Music music) {
 //        this.music = music;
 //    }
@@ -56,14 +72,7 @@ public class MusicPlayer {
 //        this.musicList = musicList;
 //    }
 
-    public String playMusic() {
-        String s = "";
 
-        for (Music music: musicList) {
-            s += "// " +  music.getSong();
-        }
-        return s;
-    }
 
 //    public void playMusic() {
 //        for (Music music: musicList) {
