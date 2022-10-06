@@ -1,14 +1,11 @@
 package ru.example.company;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
 public class MusicPlayer {
     private List<Music> musicList = new ArrayList<Music>();
     @Value("${musicPlayer.name}")
@@ -32,7 +29,6 @@ public class MusicPlayer {
         this.volume = volume;
     }
 
-//    @Autowired
     public MusicPlayer(@Qualifier("classicalMusic") Music classicalMusic,
                        @Qualifier("rockMusic") Music rockMusic,
                        @Qualifier("tranceMusic") Music tranceMusic) {
@@ -56,48 +52,4 @@ public class MusicPlayer {
             default: return null;
         }
     }
-
-//    public void setMusic(Music music) {
-//        this.music = music;
-//    }
-//
-//    //    List<Music> musicList = new ArrayList<Music>();
-//    private String name;
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public int getVolume() {
-//        return volume;
-//    }
-//
-//    public void setVolume(int volume) {
-//        this.volume = volume;
-//    }
-//
-//    private int volume;
-//
-//    public MusicPlayer(Music music) {
-//        this.music = music;
-//    }
-//
-//    public MusicPlayer() {
-//    }
-
-//    public void setMusicList(List<Music> musicList) {
-//        this.musicList = musicList;
-//    }
-
-
-
-//    public void playMusic() {
-//        for (Music music: musicList) {
-//            System.out.println("Playing: " + music.getSong());
-//        }
-//    }
 }

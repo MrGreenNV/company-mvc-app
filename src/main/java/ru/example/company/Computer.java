@@ -1,10 +1,7 @@
 package ru.example.company;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
-//@Component
 public class Computer {
     private int id;
     MusicPlayer player;
@@ -26,5 +23,4 @@ public class Computer {
                 '}' + "\n" + player.getName() +
                 " " + player.getVolume();
     }
-
 }
