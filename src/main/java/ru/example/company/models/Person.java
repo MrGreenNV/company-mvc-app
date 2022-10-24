@@ -1,9 +1,19 @@
 package ru.example.company.models;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class Person {
     private int id;
+    @NotEmpty(message = "не пустое!")
+    @Size(min = 2, max = 30, message = "от 2 до 30!")
     private String name;
+    @Min(value = 0, message = "от 0 и больше!")
     private int age;
+    @NotEmpty(message = "Не пустое!")
+    @Email(message = "не емайл!")
     private String email;
 
     public Person(int id, String name, int age, String email) {
