@@ -3,34 +3,77 @@ package ru.example.company.dao;
 import org.springframework.stereotype.Component;
 import ru.example.company.models.Person;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class PersonDAO {
-    private List<Person> people;
     private static int PEOPLE_COUNT = 0;
 
-    {
-        people = new ArrayList<>();
+    private static final String URL = "jdbc:postgresql://localhost:5432/company_db";
+    private static final String USERNAME = "postgres";
+    private static final String PASSWORD = "postgres";
 
-        people.add(new Person(++PEOPLE_COUNT, "Tom", 24, "tom@yandex.ru"));
-        people.add(new Person(++PEOPLE_COUNT, "Katy", 29, "katy@gmail.com"));
-        people.add(new Person(++PEOPLE_COUNT, "Nick", 30, "nick@rambler.com"));
-        people.add(new Person(++PEOPLE_COUNT, "Max", 27, "max@bk.ru"));
+    private static Connection connection;
+
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Person> index() {
+        List<Person> people = new ArrayList<>();
+
+        try {
+            Statement statement = connection.createStatement();
+            String SQL = "SELECT * FROM Person";
+            ResultSet resultSet = statement.executeQuery(SQL);
+
+            while (resultSet.next()) {
+                Person person = new Person();
+
+                person.setId(resultSet.getInt("id"));
+                person.setName(resultSet.getString("name"));
+                person.setAge(resultSet.getInt("age"));
+                person.setEmail(resultSet.getString("email"));
+
+                people.add(person);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         return people;
     }
 
     public Person show(int id) {
-        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+//        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+        return null;
     }
 
     public void save(Person person) {
         person.setId(++PEOPLE_COUNT);
-        people.add(person);
+//        people.add(person);
+
+        try {
+            Statement statement = connection.createStatement();
+            String SQL = "INSERT INTO Person VALUES(" + 1 + ",'" + person.getName() +
+                    "'," + person.getAge() + ",'" + person.getEmail() + "')";
+
+            statement.executeUpdate(SQL);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void update(int id, Person updatedPerson) {
@@ -42,6 +85,6 @@ public class PersonDAO {
     }
 
     public void delete(int id) {
-        people.removeIf(p -> p.getId() == id);
+//        people.removeIf(p -> p.getId() == id);
     }
 }
